@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebConfigConnectionStringTool", "WebConfigConnectionStringTool.csproj", "{8DF0A4E0-14AC-4E17-BEB0-F95BAC09E20B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sqlcmdtool", "sqlcmdtool.csproj", "{8DF0A4E0-14AC-4E17-BEB0-F95BAC09E20B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

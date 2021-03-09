@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8DF0A4E0-14AC-4E17-BEB0-F95BAC09E20B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WebConfigConnectionStringTool</RootNamespace>
+    <RootNamespace>SqlCommandLineTool</RootNamespace>
     <AssemblyName>sql</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
