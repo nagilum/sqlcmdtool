@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WebConfig ConnectionString Tool")]
+[assembly: AssemblyTitle("SQL Command-Line Tool")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WebConfig ConnectionString Tool")]
-[assembly: AssemblyCopyright("Copyright © 2021")]
+[assembly: AssemblyProduct("SQL Command-Line Tool")]
+[assembly: AssemblyCopyright("Copyright © 2021 Stian Hanger")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
