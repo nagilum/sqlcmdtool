@@ -379,7 +379,7 @@ namespace WebConfigConnectionStringTool
             if (files.Length == 1)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write("[FOUND] ");
+                Console.Write("[WEB.CONFIG] ");
 
                 Console.ResetColor();
                 Console.WriteLine(files[0]);
@@ -474,7 +474,7 @@ namespace WebConfigConnectionStringTool
             Console.CursorTop -= files.Length + 1;
 
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.Write("[FOUND] ");
+            Console.Write("[WEB.CONFIG] ");
 
             Console.ResetColor();
             Console.WriteLine(file);
@@ -511,7 +511,7 @@ namespace WebConfigConnectionStringTool
             if (File.Exists(path))
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write("[FOUND] ");
+                Console.Write("[SSMS] ");
 
                 Console.ResetColor();
                 Console.WriteLine(path);
@@ -581,7 +581,7 @@ namespace WebConfigConnectionStringTool
                 path = files[0];
 
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write("[FOUND] ");
+                Console.Write("[SSMS] ");
 
                 Console.ResetColor();
                 Console.WriteLine(path);
