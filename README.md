@@ -9,6 +9,12 @@ Usage: `sql` `[options]`
 * `--cs <name>` Use the named connection string. Defaults to `MainConnectionString`.
 * `--list` List all found connection strings.
 
+# How It Works
+
+1. First it scans all directories from the current one and deeper to find all `web.config` files. If there are more than one, the user can select the correct one.
+2. Then is looks at its local cache to see if the location of the .exe for SSMS is there, if not if scans the common folders for it, and caches the result for next time. If there are more than one hits, the user can select the correct one.
+3. It fires up the SSMS app and waits for the connection dialog to appear. When it does, it fill in the server hostname, username, and password, then presses the connect button. It is important that you don't change the active window while this is going on. Usually it takes between 5 and 10 seconds for SSMS to launch and login.
+
 # How To Use
 
 *Open SSMS with default connection string*
