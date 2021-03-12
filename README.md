@@ -15,7 +15,11 @@ Usage: `sql` `[options]`
 2. Then is looks at its local cache to see if the location of the .exe for SSMS is there, if not if scans the common folders for it, and caches the result for next time. If there are more than one hits, the user can select the correct one.
 3. It fires up the SSMS app and waits for the connection dialog to appear. When it does, it fill in the server hostname, username, and password, then presses the connect button. It is important that you don't change the active window while this is going on. Usually it takes between 5 and 10 seconds for SSMS to launch and login.
 
-# How It Looks
+# Um, What?
+
+You might think that point 3 from the list above doesn't make sense. Why not use the SSMS startup params to specify these things? Well Microsoft decided to remove the option for setting a password as a param, citing security reasons. So this is the workaround..
+
+# What It Looks Like
 
 ![The console output while the app is running with the --open switch](https://raw.githubusercontent.com/nagilum/sqlcmdtool/main/assets/images/what-it-looks-like.png)
 
