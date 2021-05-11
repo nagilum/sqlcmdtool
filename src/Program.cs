@@ -41,13 +41,13 @@ namespace WebConfigConnectionStringTool
             CmdArgs = args;
 
             // Show list of all connection strings in local web.config file?
-            if (CheckCmdSwitch("list"))
+            if (CheckCmdSwitch("list", "l"))
             {
                 ListConnectionStrings();
             }
 
             // Open Microsoft SQL Server Management Studio?
-            else if (CheckCmdSwitch("open"))
+            else if (CheckCmdSwitch("open", "o"))
             {
                 LoginToSqlManagementStudio();
             }
@@ -64,29 +64,39 @@ namespace WebConfigConnectionStringTool
         /// <summary>
         /// Check if a cmd-args switch exists.
         /// </summary>
-        /// <param name="name">Switch to check for.</param>
+        /// <param name="names">Switch to check for.</param>
         /// <returns>Found.</returns>
-        private static bool CheckCmdSwitch(string name)
+        private static bool CheckCmdSwitch(params string[] names)
         {
-            return CmdArgs != null &&
-                   CmdArgs.Any(n => n == $"--{name}");
+            if (CmdArgs == null)
+            {
+                return false;
+            }
+
+            return names.Any(
+                name => CmdArgs.Any(
+                    n => n == $"-{name}" ||
+                         n == $"--{name}"));
         }
 
         /// <summary>
         /// Get an option value from the list of arguments.
         /// </summary>
-        /// <param name="name">Name of value to get.</param>
+        /// <param name="names">Name of value to get.</param>
         /// <returns>Value.</returns>
-        private static string GetCmdArgValue(string name)
+        private static string GetCmdArgValue(params string[] names)
         {
-            if (CmdArgs.Length < 2)
+            if (CmdArgs == null ||
+                CmdArgs.Length < 2)
             {
                 return null;
             }
 
             for (var i = 0; i < CmdArgs.Length - 1; i++)
             {
-                if (CmdArgs[i] == $"--{name}")
+                if (names.Any(
+                    name => CmdArgs[i] == $"-{name}" ||
+                            CmdArgs[i] == $"--{name}"))
                 {
                     return CmdArgs[i + 1];
                 }
@@ -153,6 +163,7 @@ namespace WebConfigConnectionStringTool
                     }
 
                     string hostname = null;
+                    string database = null;
                     string username = null;
 
                     foreach (var entry in entries)
@@ -173,6 +184,10 @@ namespace WebConfigConnectionStringTool
                                 hostname = value;
                                 break;
 
+                            case "initial catalog":
+                                database = value;
+                                break;
+
                             case "user id":
                                 username = value;
                                 break;
@@ -185,7 +200,7 @@ namespace WebConfigConnectionStringTool
                         continue;
                     }
 
-                    Console.WriteLine($"{name} - {username}@{hostname}");
+                    Console.WriteLine($"{name} - {username}@{database}:{hostname}");
                 }
             }
         }
@@ -354,10 +369,11 @@ namespace WebConfigConnectionStringTool
 
             // Get all web.config files.
             string[] files;
+            string path;
 
             try
             {
-                var path = Directory.GetCurrentDirectory();
+                path = Directory.GetCurrentDirectory();
 
                 files = Directory.GetFiles(
                     path,
@@ -382,7 +398,7 @@ namespace WebConfigConnectionStringTool
                 Console.Write("[WEB.CONFIG] ");
 
                 Console.ResetColor();
-                Console.WriteLine(files[0]);
+                Console.WriteLine($"..{files[0].Substring(path.Length)}");
 
                 return files[0];
             }
@@ -392,8 +408,7 @@ namespace WebConfigConnectionStringTool
 
             var ltc = files
                 .Select(t => t.Length + 3)
-                .Prepend(str.Length)
-                .Max();
+                .Max() + str.Length;
 
             Console.WriteLine(str);
 
@@ -410,7 +425,7 @@ namespace WebConfigConnectionStringTool
                         ? ConsoleColor.DarkCyan
                         : ConsoleColor.White;
 
-                    Console.WriteLine($" > {files[i]}");
+                    Console.WriteLine($" > ..{files[i].Substring(path.Length)}");
                 }
 
                 var key = Console.ReadKey(true);
@@ -460,7 +475,7 @@ namespace WebConfigConnectionStringTool
 
             str = "";
 
-            for (var i = 0; i < ltc; i++)
+            for (var i = 0; i < Console.WindowWidth; i++)
             {
                 str += " ";
             }
@@ -470,6 +485,12 @@ namespace WebConfigConnectionStringTool
                 Console.WriteLine(str);
             }
 
+            // Check for data..
+            if (file == null)
+            {
+                return null;
+            }
+
             // Output
             Console.CursorTop -= files.Length + 1;
 
@@ -477,7 +498,7 @@ namespace WebConfigConnectionStringTool
             Console.Write("[WEB.CONFIG] ");
 
             Console.ResetColor();
-            Console.WriteLine(file);
+            Console.WriteLine($"..{file.Substring(path.Length)}");
 
             return file;
         }
@@ -603,8 +624,7 @@ namespace WebConfigConnectionStringTool
 
             var ltc = files
                 .Select(t => t.Length + 3)
-                .Prepend(str.Length)
-                .Max();
+                .Max() + str.Length;
 
             Console.WriteLine(str);
 
